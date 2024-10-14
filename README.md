@@ -1,24 +1,22 @@
-# vue2-cli-vuex-todo-app
+# Vue 2 CLI - vuex를 활용한 TODO APP
 
-## Project setup
-```
-npm install
-```
+<details>
+<summary style="font-size:30px; font-weight:bold; font-style:italic;">Vue CLI Install(Default)</summary>
+<br>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- ### vue project 생성
 
-### Compiles and minifies for production
-```
-npm run build
-```
+  ```bash
+  vue create {프로젝트명}
+  ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+- ### 개발 환경 구축 옵션 선택
+  ```text/plain
+  Vue CLI v5.0.8
+  ? Please pick a preset:
+    Default ([Vue 3] babel, eslint)
+  > Default ([Vue 2] babel, eslint)
+    Manually select features
+  ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+</details>
