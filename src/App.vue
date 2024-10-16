@@ -3,11 +3,11 @@
     <h1 class="text-center">Todo App</h1>
     <input type="text" class="w-100 p-2" placeholder="Type todo">
     <hr>
-    <Todo/>
-    <div>
-      <input type="checkbox">
-      <span class="ml-3">Buy a car</span>
-    </div>
+    <Todo 
+      v-for="todo in todos" 
+      :key="todo.id"
+      :todo="todo"
+    />
   </div>
 </template>
 
@@ -18,10 +18,15 @@ export default {
     Todo 
   },
   data() {
-
+    return {
+      todos: [
+        { id: 1, text: 'buy a car', checked: false},
+        { id: 2, text: 'play a game', checked: false},
+      ]
+    }
   },
   methods: {
-
+    
   }
 }
 </script>
