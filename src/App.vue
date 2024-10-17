@@ -6,6 +6,7 @@
       class="w-100 p-2" 
       placeholder="Type todo"
       @keyup.enter="addTodo"
+      v-model="todoText"
     >
     <hr>
     <Todo 
@@ -24,6 +25,7 @@ export default {
   },
   data() {
     return {
+      todoText: '',
       todos: [
         { id: 1, text: 'buy a car', checked: false},
         { id: 2, text: 'play a game', checked: false},
@@ -38,6 +40,7 @@ export default {
         text: e.target.value,
         checked: false
       })
+      this.todoText = '';
     }
   }
 }
