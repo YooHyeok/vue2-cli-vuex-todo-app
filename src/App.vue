@@ -14,6 +14,7 @@
       :key="todo.id"
       :todo="todo"
       @toggle-checkbox="toggleCheckbox"
+      @toggle-delete="deleteTodo"
     />
   </div>
 </template>
@@ -47,6 +48,10 @@ export default {
       const index = this.todos.findIndex(todo => todo.id===id);
       this.todos[index].checked = checked;
       console.log(this.todos)
+    },
+    deleteTodo(id) {
+      const index = this.todos.findIndex(todo => todo.id===id);
+      this.todos.splice(index, 1)
     }
   }
 }
