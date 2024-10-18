@@ -13,6 +13,10 @@
       >
         {{ todo.text }}
       </span>
+      <button 
+        class="btn btn-danger btn-sm"
+        @click="clickDelete"
+      >DELETE</button>
   </div>
 </template>
 
@@ -41,6 +45,9 @@ export default {
         id: this.todo.id,
         checked: e.target.checked
       })
+    },
+    clickDelete() {
+      this.$emit('toggle-delete', this.todo.id)
     },
   },
 };
