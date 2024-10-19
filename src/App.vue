@@ -1,13 +1,10 @@
 <template>
   <div id="app" class="container">
     <h1 class="text-center">Todo App</h1>
-    <input 
-      type="text" 
-      class="w-100 p-2" 
-      placeholder="Type todo"
-      @keyup.enter="addTodo"
-      v-model="todoText"
-    >
+    
+    <AddTodo 
+      @add-todo="addTodo"
+    />
     <hr>
     <TodoList 
       :todos="todos"
@@ -19,13 +16,13 @@
 
 <script>
 import TodoList from '@/components/TodoList.vue'
+import AddTodo from '@/components/AddTodo.vue';
 export default {
   components: {
-    TodoList 
+    TodoList, AddTodo 
   },
   data() {
     return {
-      todoText: '',
       todos: [
         { id: 1, text: 'buy a car', checked: false},
         { id: 2, text: 'play a game', checked: false},
@@ -33,13 +30,12 @@ export default {
     }
   },
   methods: {
-    addTodo(e) {
+    addTodo(value) {
       this.todos.push({
         id: Math.random(),
-        text: e.target.value,
+        text: value,
         checked: false
       })
-      this.todoText = '';
     },
     toggleCheckbox({id, checked}) {
       const index = this.todos.findIndex(todo => todo.id===id);
