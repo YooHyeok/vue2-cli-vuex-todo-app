@@ -9,10 +9,8 @@
       v-model="todoText"
     >
     <hr>
-    <Todo 
-      v-for="todo in todos" 
-      :key="todo.id"
-      :todo="todo"
+    <TodoList 
+      :todos="todos"
       @toggle-checkbox="toggleCheckbox"
       @toggle-delete="deleteTodo"
     />
@@ -20,10 +18,10 @@
 </template>
 
 <script>
-import Todo from '@/components/Todo.vue'
+import TodoList from '@/components/TodoList.vue'
 export default {
   components: {
-    Todo 
+    TodoList 
   },
   data() {
     return {
@@ -36,7 +34,6 @@ export default {
   },
   methods: {
     addTodo(e) {
-      console.log(e.target.value)
       this.todos.push({
         id: Math.random(),
         text: e.target.value,
