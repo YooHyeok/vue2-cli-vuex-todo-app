@@ -11,17 +11,22 @@
 </template>
 
 <script>
-import Todo from '@/components/Todo.vue'
+import Todo from '@/basic/components/Todo.vue'
 
 export default {
   name: 'TodoList',
   components: {
     Todo 
   },
-  props: {
+  /* props: {
     todos: {
       type: Array,
       required: true
+    }
+  }, */
+  computed: {
+    todos() {
+      return this.$store.state.todos;
     }
   },
   methods: {

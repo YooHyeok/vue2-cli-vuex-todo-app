@@ -1,9 +1,10 @@
 <template>
   <div id="app" class="container">
     <h1 class="text-center">Todo App</h1>
-    <CompletedTodo 
+    <!-- <CompletedTodo 
       :todos="todos"
-    />
+    /> -->
+    <CompletedTodo/>
     <AddTodo 
       @add-todo="addTodo"
     />
@@ -17,9 +18,9 @@
 </template>
 
 <script>
-import TodoList from '@/components/TodoList.vue'
-import AddTodo from '@/components/AddTodo.vue';
-import CompletedTodo from '@/components/CompletedTodo.vue';
+import TodoList from '@/basic/components/TodoList.vue'
+import AddTodo from '@/basic/components/AddTodo.vue';
+import CompletedTodo from '@/basic/components/CompletedTodo.vue';
 
 export default {
   components: {
@@ -27,10 +28,10 @@ export default {
   },
   data() {
     return {
-      todos: [
+      /* todos: [
         { id: 1, text: 'buy a car', checked: false},
         { id: 2, text: 'play a game', checked: false},
-      ]
+      ] */
     }
   },
   methods: {
