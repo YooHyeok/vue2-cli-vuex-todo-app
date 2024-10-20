@@ -38,3 +38,70 @@
     ```
 
 </details>
+<details>
+<summary style="font-size:30px; font-weight:bold; font-style:italic;">Vuex(store) install 및 적용</summary>
+<br>
+
+- ### 기본 명령어
+  ```bash
+  npm install vuex
+  ```
+  기본 명령어를 사용할 경우 최신버전인 4 버전이 설치 된다.  
+  그러나 현재 vue 버전에서는 4 버전을 지원하지 않는다.  
+  따라서 아래와 같이 진행한다.  
+
+  (만약 이미 4 버전을 설치했다면 제거 후 진행하도록 한다.  )
+
+- ### 제거 명령어
+  ```bash
+  npm uninstall vuex
+  ```
+  기본 명령어를 사용할 경우 최신버전인 4 버전이 설치 된다.  
+  그러나 현재 vue 버전에서는 4 버전을 지원하지 않는다.  
+  따라서 아래와 같이 진행한다.  
+
+- ### 3.1.3 설치 명령어
+  ```bash
+  npm install vuex/@3.1.3
+  ```
+
+- ### Store 구성
+  ```js
+  import Vue from 'vue'
+  import Vuex from 'vuex'
+  Vue.use(Vuex)
+
+  export default new Vuex.Store({
+    state: {
+      todos: [
+        { id: 1, text: 'buy a car', checked: false},
+        { id: 2, text: 'play a game', checked: false},
+      ]
+    },
+    mutations: {
+
+    },
+    actions: {
+
+    },
+    getters: {
+
+    }
+  })
+  ```
+
+- ### Store 적용 (전역 등록)
+  ```js
+  import Vue from 'vue'
+  import App from './App.vue'
+  import store from './store'
+
+  Vue.config.productionTip = false
+
+  new Vue({
+    store,
+    render: h => h(App),
+  }).$mount('#app')
+  ```
+
+</details>
