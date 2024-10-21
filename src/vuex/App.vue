@@ -1,15 +1,12 @@
 <template>
   <div id="app" class="container">
     <h1 class="text-center">Todo App</h1>
-    <CompletedTodo 
-      :todos="todos"
-    />
+    <CompletedTodo/>
     <AddTodo 
       @add-todo="addTodo"
     />
     <hr>
     <TodoList 
-      :todos="todos"
       @toggle-checkbox="toggleCheckbox"
       @toggle-delete="deleteTodo"
     />
@@ -24,14 +21,6 @@ import CompletedTodo from '@/vuex/components/CompletedTodo.vue';
 export default {
   components: {
     TodoList, AddTodo, CompletedTodo
-  },
-  data() {
-    return {
-      todos: [
-        { id: 1, text: 'buy a car', checked: false},
-        { id: 2, text: 'play a game', checked: false},
-      ]
-    }
   },
   methods: {
     addTodo(value) {
