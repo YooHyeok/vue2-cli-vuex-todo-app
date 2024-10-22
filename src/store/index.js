@@ -17,7 +17,13 @@ export default new Vuex.Store({
         text: payload,
         checked: false
       })
-    }
+    },
+    DELETE_TODO(state, payload) {
+      console.log("payload: ", payload)
+      const index = state.todos.findIndex(todo => todo.id===payload);
+      state.todos.splice(index, 1)
+      // state.todos = state.todos.filter(todo => todo.id!==payload);
+    },
   },
   actions: {
 
