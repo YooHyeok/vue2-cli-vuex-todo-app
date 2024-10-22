@@ -38,7 +38,7 @@ export default {
       })
     },
     clickDelete() {
-      this.$emit('toggle-delete', this.todo.id)
+      this.$store.commit('DELETE_TODO', this.todo.id)
     },
   },
 };
