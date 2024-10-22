@@ -18,6 +18,11 @@ export default new Vuex.Store({
         checked: false
       })
     },
+    TOGLE_TODO(state, payload) {
+      console.log("payload: ", payload)
+      const index = state.todos.findIndex(todo => todo.id===payload.id);
+      state.todos[index].checked = payload.checked;
+    },
     DELETE_TODO(state, payload) {
       console.log("payload: ", payload)
       const index = state.todos.findIndex(todo => todo.id===payload);
