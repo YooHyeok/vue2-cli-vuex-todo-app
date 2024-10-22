@@ -9,8 +9,15 @@ export default new Vuex.Store({
       { id: 2, text: 'play a game', checked: false},
     ]
   },
-  mutations: {
-
+  mutations: { // state 접근 및 변경 함수 정의
+    ADD_TODO(state, payload) {
+      console.log("payload: ", payload)
+      state.todos.push({
+        id: Math.random(),
+        text: payload,
+        checked: false
+      })
+    }
   },
   actions: {
 
