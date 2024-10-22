@@ -32,7 +32,7 @@ export default {
 
   methods: {
     toggleCheckbox(e) {
-      this.$emit('toggle-checkbox', {
+      this.$store.commit('TOGLE_TODO', {
         id: this.todo.id,
         checked: e.target.checked
       })
