@@ -10,6 +10,11 @@ export default new Vuex.Store({
     ]
   },
   mutations: { // state 접근 및 변경 함수 정의
+    FETCH_ALL(state, payload) {
+      const {taskAResponse, taskBResponse} = payload;
+      todos.push([...taskAResponse, ...taskBResponse])
+      console.log(todos)
+    },
     ADD_TODO(state, payload) {
       console.log("payload: ", payload)
       state.todos.push({
@@ -18,7 +23,7 @@ export default new Vuex.Store({
         checked: false
       })
     },
-    TOGLE_TODO(state, payload) {
+    TOGGLE_TODO(state, payload) {
       console.log("payload: ", payload)
       const index = state.todos.findIndex(todo => todo.id===payload.id);
       state.todos[index].checked = payload.checked;
@@ -30,8 +35,16 @@ export default new Vuex.Store({
       // state.todos = state.todos.filter(todo => todo.id!==payload);
     },
   },
-  actions: {
-
+  actions: { // 비동기 작업 후 state 변경
+    fetchAll() {
+      Promise.all([fetch(`/task-a/${payload}`), fetch(`/task-b/${payload}`)])
+      .then(([taskAResponse, taskBResponse]) => {
+        commit('FETCH_ALL', {taskAResponse, taskBResponse}); //state 변경
+      })
+      .catch(e => {
+        console.error('[ERROR][actions]Error in one of the tasks:', e);
+      });
+    },
   },
   getters: {
 
