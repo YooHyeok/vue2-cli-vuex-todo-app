@@ -38,7 +38,8 @@ export default {
       })
     },
     clickDelete() {
-      this.$store.commit('DELETE_TODO', this.todo.id)
+      // this.$store.commit('DELETE_TODO', this.todo.id) // mutation 호출
+      this.$store.dispatch('deleteTodo', this.todo.id) // action 호출
     },
   },
 };
