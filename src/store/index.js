@@ -8,8 +8,12 @@ export default new Vuex.Store({
       { id: 1, text: 'buy a car', checked: false},
       { id: 2, text: 'play a game', checked: false},
     ],
+    users: []
   },
   mutations: { // state 접근 및 변경 함수 정의
+    SET_USERS(state, payload) {
+      state.users = payload
+    },
     FETCH_ALL(state, payload) {
       const {taskAResult, taskBResult} = payload;
       // todos.push([...taskAResponse, ...taskBResponse])
@@ -36,6 +40,20 @@ export default new Vuex.Store({
     },
   },
   actions: { // 비동기 작업 후 state 변경
+    getUsers(context, payload) {
+      const {commit, dispatch} = context;
+      /* fetch('http://jsonplaceholder.typicode.com/users')
+      .then(res => 
+        res.json()
+      )
+      .then(json => {
+        commit('SET_USERS', json)
+      }) */
+      axios.get('http://jsonplaceholder.typicode.com/users')
+      .then(res => {
+        commit('SET_USERS', res.data)
+      })
+    },
     fetchAll(context, payload) {
       const {commit, dispatch} = context;
       const URL = 'http://jsonplaceholder.typicode.com/todos'
