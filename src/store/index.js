@@ -52,6 +52,13 @@ export default new Vuex.Store({
         commit('ADD_TODO', payload);
       }, 2000) //2초 후 실행
     },
+    toggleTodo(context, payload) {
+      const {commit, dispatch} = context;
+      /* 비동기 작업 ex) axios(2초 소요) 후 commit 호출 */
+      setTimeout(function() {
+        commit('TOGGLE_TODO', payload);
+      }, 2000) //2초 후 실행
+    },
     deleteTodo(context, payload) {
       const {commit, dispatch} = context;
       /* 비동기 작업 ex) axios(2초 소요) 후 commit 호출 */
