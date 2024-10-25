@@ -24,9 +24,10 @@ export default {
     this.getUsers();
   },
   methods: {
-    getUsers() {
+    /* getUsers() { // map Helper 적용 전
       this.$store.dispatch('getUsers');
-    }
+    } */
+    ...mapActions(['getUsers']), //map Helper 적용 - store의 getUsers action 함수를 현재 컴포넌트의 methods 속성에 적용
   }
 };
 </script>
