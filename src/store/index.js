@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -93,7 +94,9 @@ export default new Vuex.Store({
       }, 2000) //2초 후 실행
     }
   },
-  getters: {
-
+  getters: { // 컴포넌트의 computed에서 사용한다. (재사용 가능) computed처럼 캐싱기능 있음.
+    numberOfCompletedTodo(state) {
+      return state.todos.filter(todo => todo.checked).length
+    }
   }
 })
