@@ -8,11 +8,12 @@
 export default {
   name: 'CompletedTodo',
   computed: {
-    todos() {
+    /* todos() { // getters 적용 전
       return this.$store.state.todos
-    },
+    }, */
     numberOfCompletedTodo() {
-      return this.todos.filter(todo => todo.checked).length
+      // return this.todos.filter(todo => todo.checked).length // getters 적용 전
+      return this.$store.getters.numberOfCompletedTodo // getters 적용
     }
   },
 };
