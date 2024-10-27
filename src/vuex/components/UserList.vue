@@ -1,7 +1,11 @@
 <template>
   <div>
-    UserList
+    <b>UserList</b>
     <div v-for="user in users" :key="user.id">
+      {{ user.name }}
+    </div>
+    <b>PeopleList</b>
+    <div v-for="user in people" :key="user.id">
       {{ user.name }}
     </div>
   </div>
@@ -18,6 +22,7 @@ export default {
       return this.$store.state.users;
     } */
     ...mapState(['users']), //map Helper 적용 - store의 state를 현재 컴포넌트의 computed 속성에 적용
+    ...mapState({people: 'users'}), //map Helper - users state를 다른 이름으로 변경
 
   },
   created() {
