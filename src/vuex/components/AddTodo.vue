@@ -19,7 +19,8 @@ export default {
   methods: {
     addTodo(e) {
       // this.$store.commit('ADD_TODO', e.target.value) // mutation 호출
-      this.$store.dispatch('addTodo', e.target.value) // action 호출
+      // this.$store.dispatch('addTodo', e.target.value) // action 호출
+      this.$store.dispatch('todo/addTodo', e.target.value) // action 호출
       this.todoText = null
     },
   },
