@@ -35,11 +35,13 @@ export default {
       const id = this.todo.id;
       const checked = e.target.checked;
       // this.$store.commit('TOGGLE_TODO', {id, checked}) // mutation 호출
-      this.$store.dispatch('toggleTodo', {id, checked}) // action 호출
+      // this.$store.dispatch('toggleTodo', {id, checked}) // action 호출
+      this.$store.dispatch('todo/toggleTodo', {id, checked}) // action 호출
     },
     clickDelete() {
       // this.$store.commit('DELETE_TODO', this.todo.id) // mutation 호출
-      this.$store.dispatch('deleteTodo', this.todo.id) // action 호출
+      // this.$store.dispatch('deleteTodo', this.todo.id) // action 호출
+      this.$store.dispatch('todo/deleteTodo', this.todo.id) // action 호출
     },
   },
 };
