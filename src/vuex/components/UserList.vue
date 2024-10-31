@@ -32,8 +32,11 @@ export default {
 
     /* [modules] 적용 */
     /* 명시적 참조 - 데이터 추가 가공 */
-    ...mapState({users: state => state.user.users}),
-    ...mapState({people: state => state.user.users}),
+    // ...mapState({users: state => state.user.users}),
+    // ...mapState({people: state => state.user.users}),
+    /*  직접 참조 */
+    ...mapState('user', ['users']),
+    ...mapState('user', { people: 'users' }),
   },
   created() {
     this.getUsers();
