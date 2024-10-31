@@ -27,8 +27,13 @@ export default {
     // ...mapState({users: state => state.users}),
     // ...mapState({people: state => state.users}),
     /*  직접 참조 */
-    ...mapState(['users']), 
-    ...mapState({people: 'users'}),
+    // ...mapState(['users']), 
+    // ...mapState({people: 'users'}),
+
+    /* [modules] 적용 */
+    /* 명시적 참조 - 데이터 추가 가공 */
+    ...mapState({users: state => state.user.users}),
+    ...mapState({people: state => state.user.users}),
   },
   created() {
     this.getUsers();
