@@ -1,5 +1,9 @@
 {
   "rules": {
     "vue/multi-word-component-names": "off"  // 다중 단어 컴포넌트 이름 규칙 비활성화
-  }
+  },
+  "parserOptions": {
+    "ecmaVersion": 2015,
+    "sourceType": "module"
+  },
 }
