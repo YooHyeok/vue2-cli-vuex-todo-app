@@ -21,9 +21,14 @@ export default {
     /* users() { // map Helper 적용 전
       return this.$store.state.users;
     } */
-    ...mapState(['users']), //map Helper 적용 - store의 state를 현재 컴포넌트의 computed 속성에 적용
-    ...mapState({people: 'users'}), //map Helper - users state를 다른 이름으로 변경
 
+    /* [map Helper] - mapState() : store의 state를 현재 컴포넌트의 computed 속성에 적용  */
+    /* 명시적 참조 - 데이터 추가 가공 */
+    ...mapState({users: state => state.users}),
+    ...mapState({people: state => state.users}),
+    /*  직접 참조 */
+    ...mapState(['users']), 
+    ...mapState({people: 'users'}),
   },
   created() {
     this.getUsers();
@@ -32,7 +37,9 @@ export default {
     /* getUsers() { // map Helper 적용 전
       this.$store.dispatch('getUsers');
     } */
-    ...mapActions(['getUsers']), //map Helper 적용 - store의 getUsers action 함수를 현재 컴포넌트의 methods 속성에 적용
+
+    /* [map Helper] - mapState() : store의 getUsers action 함수를 현재 컴포넌트의 methods 속성에 적용  */
+    ...mapActions(['getUsers']),
   }
 };
 </script>
