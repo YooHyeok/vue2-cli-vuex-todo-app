@@ -24,8 +24,8 @@ export default {
 
     /* [map Helper] - mapState() : store의 state를 현재 컴포넌트의 computed 속성에 적용  */
     /* 명시적 참조 - 데이터 추가 가공 */
-    ...mapState({users: state => state.users}),
-    ...mapState({people: state => state.users}),
+    // ...mapState({users: state => state.users}),
+    // ...mapState({people: state => state.users}),
     /*  직접 참조 */
     ...mapState(['users']), 
     ...mapState({people: 'users'}),
@@ -39,7 +39,9 @@ export default {
     } */
 
     /* [map Helper] - mapState() : store의 getUsers action 함수를 현재 컴포넌트의 methods 속성에 적용  */
-    ...mapActions(['getUsers']),
+    // ...mapActions(['getUsers']),
+    /* [modules] 적용 */
+    ...mapActions('user', ['getUsers']),
   }
 };
 </script>
