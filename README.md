@@ -107,6 +107,7 @@
 <summary style="font-size:30px; font-weight:bold; font-style:italic;">Vuex State</summary>
 <br>
 
+# 호출
 state 변수는 vue 확장자 파일의 computed 속성에 호출하여 사용한다.  
 
 computed는 함수 형태를 정의하고, template에 해당 함수를 할당 함으로 초기 렌더링시 computed에 정의 한 함수가 호출된다.  
@@ -137,6 +138,80 @@ vuex state 변수의 경우 `return this.$store.state.todo` 면 `todo`, `return 
     }
   </script>
   ```
+
+
+</details>
+<details>
+<summary style="font-size:30px; font-weight:bold; font-style:italic;">Vuex Mutations</summary>
+<br>
+
+# 정의
+vuex에서 state에 있는 변수를 변경할때는 mutations 안에서 변경하는것이 규칙이다.
+- ### Store
+  ```js
+  import Vue from 'vue'
+  import Vuex from 'vuex'
+  Vue.use(Vuex)
+
+  export default new Vuex.Store({
+    state: {
+      todos: [
+        { id: 1, text: 'buy a car', checked: false},
+        { id: 2, text: 'play a game', checked: false},
+      ]
+    },
+    mutations: {
+      ADD_TODO(state, payload) {
+        state.todos.push({
+          id: Math.random(),
+          text: payload,
+          checked: false
+        })
+      },
+    },
+    actions: {
+
+    },
+    getters: {
+
+    }
+  })
+  ```
+mutations 속성에 함수를 정의하고 해당 함수 블록에서 state에 접근하여 state를 변경한다.
+이때 함수의 첫번째 매개변수로 state를, 두번째 매개변수로 payload를 받는다.
+payload는 mutations의 함수가 호출될때 전달하는 값이다.
+
+# 호출
+
+
+- ### commit
+  mutations를 vue 확장자 파일에서 호출할때는 methods 속성에서 함수를 정의하고, commit을 통해 호출한다.
+
+  - #### ___.vue
+    ```html
+    <template>
+      <button 
+        @keyup.enter="addTodo"
+      >
+    </template>
+
+    <script>
+    export default {
+      name: 'AddTodo',
+      methods: {
+        addTodo(e) {
+          this.$store.commit('ADD_TODO', e.target.value) // mutation 호출
+        },
+      },
+    };
+    </script>
+    ```
+    첫번째 매개변수로는 mutations에 정의한 함수 이름, 두번째 매개변수로는 해당 함수의 두번째 매개변수인 payload 전달값을 할당할 수 있다.
+
+
+
+
+
 
 
 </details>
