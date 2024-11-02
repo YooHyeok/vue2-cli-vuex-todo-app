@@ -46,7 +46,7 @@ export default {
       this.$store.dispatch('getUsers');
     } */
 
-    /* [map Helper] - mapState() : store의 getUsers action 함수를 현재 컴포넌트의 methods 속성에 적용  */
+    /* [map Helper] - mapActions() : store의 getUsers action 함수를 현재 컴포넌트의 methods 속성에 적용  */
     // ...mapActions(['getUsers']),
     /* [modules] 적용 */
     ...mapActions('user', ['getUsers']),
