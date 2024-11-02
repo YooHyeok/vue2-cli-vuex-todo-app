@@ -294,7 +294,7 @@ state 변경을 보장받을 수 없고, getters같은 state 변경 감지에 �
 
 </details>
 <details>
-<summary style="font-size:30px; font-weight:bold; font-style:italic;">Vuex getters</summary>
+<summary style="font-size:30px; font-weight:bold; font-style:italic;">Vuex Getters</summary>
 <br>
 
 # 정의
@@ -355,6 +355,88 @@ getters는 vue 인스턴스의 computed속성에 정의된 함수의 반환값�
   };
   </script>
   ```
+
+</details>
+<details>
+<summary style="font-size:30px; font-weight:bold; font-style:italic;">Vuex - Map helper</summary>
+<br>
+  this.$store 객체를 통한 store의 접근 코드는 컴포넌트가 많아질수록 추적이 어려워진다.  
+  Vuex store에는 state, mutations, actions, getters 각 속성을 빠르게 접근할 수 있는 기능을 제공한다.  
+
+## Map Helper 종류
+- mapState
+- mapMutations
+- mapActions
+- mapState
+
+- ### Arrow 참조 & Object Mapping
+
+  ```html
+
+  <script>
+  import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+  export default {
+    computed: {
+      ...mapState(state => state.todos)
+      ...mapState({
+        people: state => state.todos
+      })
+      ...mapGetters(['numberOfCompletedTodo']) // getters는 화살표 함수 참조가 불가능하다.
+    },
+    methods: {
+      ...mapMutations({
+        ADD_TODO: (context, payload) => context.commit('ADD_TODO', payload),
+      })
+      ...mapActions({
+        addTodo: (context, payload) => context.dispatch('addTodo', payload)
+      })
+
+    }
+  };
+  </script>
+  ```
+- ### String 참조 - Array
+
+  ```html
+
+  <script>
+  import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+  export default {
+    computed: {
+      ...mapState(['aS', 'bS', 'cS'])
+      ...mapGetters(['aG', 'bG', 'cG']) 
+    },
+    methods: {
+      ...mapMutations(['aM', 'bM', 'cM'])
+      ...mapActions(['aA', 'bA', 'cA'])
+    }
+  };
+  </script>
+  ```
+
+- ### String 참조 - Object Mapping
+
+  ```html
+
+  <script>
+  import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+  export default {
+    computed: {
+      ...mapState(['todos'])
+      ...mapState({people: 'todos'}) // 다른 이름으로 맵핑
+      ...mapGetters(['numberOfCompletedTodo']) 
+      ...mapGetters({count: 'numberOfCompletedTodo'}) // getters는 화살표 함수 참조가 불가능하다.
+    },
+    methods: {
+      ...mapMutations(['ADD_TODO'])
+      ...mapMutations({ADD_TODO: 'ADD_TODO'})
+      ...mapActions(['addTodo'])
+      ...mapActions({addTodo: 'addTodo'})
+    }
+  };
+  </script>
+  ```
+
 
 </details>
 <details>
