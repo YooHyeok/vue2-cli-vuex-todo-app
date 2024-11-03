@@ -358,7 +358,7 @@ getters는 vue 인스턴스의 computed속성에 정의된 함수의 반환값�
 
 </details>
 <details>
-<summary style="font-size:30px; font-weight:bold; font-style:italic;">Vuex - Map helper</summary>
+<summary style="font-size:30px; font-weight:bold; font-style:italic;">Vuex Map helper</summary>
 <br>
   this.$store 객체를 통한 store의 접근 코드는 컴포넌트가 많아질수록 추적이 어려워진다.  
   Vuex store에는 state, mutations, actions, getters 각 속성을 빠르게 접근할 수 있는 기능을 제공한다.  
@@ -372,14 +372,13 @@ getters는 vue 인스턴스의 computed속성에 정의된 함수의 반환값�
 - ### Arrow 참조 & Object Mapping
 
   ```html
-
   <script>
   import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
   export default {
     computed: {
       ...mapState(state => state.todos)
       ...mapState({
-        people: state => state.todos
+        schedule: state => state.todos
       })
       ...mapGetters(['numberOfCompletedTodo']) // getters는 화살표 함수 참조가 불가능하다.
     },
@@ -423,7 +422,7 @@ getters는 vue 인스턴스의 computed속성에 정의된 함수의 반환값�
   export default {
     computed: {
       ...mapState(['todos'])
-      ...mapState({people: 'todos'}) // 다른 이름으로 맵핑
+      ...mapState({schedule: 'todos'}) // 다른 이름으로 맵핑
       ...mapGetters(['numberOfCompletedTodo']) 
       ...mapGetters({count: 'numberOfCompletedTodo'}) // getters는 화살표 함수 참조가 불가능하다.
     },
@@ -437,6 +436,122 @@ getters는 vue 인스턴스의 computed속성에 정의된 함수의 반환값�
   </script>
   ```
 
+
+</details>
+<details>
+<summary style="font-size:30px; font-weight:bold; font-style:italic;">Vuex Modules 01 (Usage)</summary>
+<br>
+
+- ### store/modules/todo.js
+  ```js
+  export default {
+    namespaced: true,
+    state: {
+      todos: [
+        { id: 1, text: 'buy a car', checked: false},
+        { id: 2, text: 'play a game', checked: false},
+      ],
+    },
+    mutations: { // state 접근 및 변경 함수 정의
+      ADD_TODO(state, payload) {
+        console.log("payload: ", payload)
+        state.todos.push({
+          id: Math.random(),
+          text: payload,
+          checked: false
+        })
+      },
+    },
+    actions: { // 비동기 작업 후 state 변경
+      addTodo(context, payload) {
+        const {commit, dispatch} = context;
+        /* 비동기 작업 ex) axios(2초 소요) 후 commit 호출 */
+        setTimeout(function() {
+          commit('ADD_TODO', payload);
+        }, 2000) //2초 후 실행
+      },
+    },
+    getters: { // 컴포넌트의 computed에서 사용한다. (재사용 가능) computed처럼 캐싱기능 있음.
+      numberOfCompletedTodo(state) {
+        return state.todos.filter(todo => todo.checked).length
+      }
+    }
+  }
+  ```
+- ### store/modules/user.js
+  ```js
+  export default {
+    namespaced: true,
+    state: {
+      users: [/* 생략 */],
+    },
+    mutations: {/* 생략 */},
+    actions: {/* 생략 */},
+    getters: {/* 생략 */}
+  }
+  ```
+
+
+- ### store/index.js
+
+  ```js
+  import Vue from 'vue'
+  import Vuex from 'vuex'
+  import todo from './modules/todo'
+  import user from './modules/user'
+  Vue.use(Vuex)
+
+  export default new Vuex.Store({
+    modules: {
+      todo,user // nameSpace 등록 
+    },
+    state: {},
+    mutations: {},
+    actions: {},
+    getters: {},
+  })
+  ```
+
+- ### Arrow 참조 & Object Mapping
+
+  ```html
+  <script>
+  import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+  export default {
+    computed: {
+      ...mapState(state => state.todo.todos)
+      ...mapState({schedule: state => state.todo.todos})
+      ...mapGetters('todo', ['numberOfCompletedTodo']) // getters는 화살표 함수 참조가 불가능하다.
+    },
+    methods: {
+      ...mapMutations({
+        ADD_TODO: (context, payload) => context.commit('todo/ADD_TODO', payload),
+      })
+      ...mapActions({
+        addTodo: (context, payload) => context.dispatch('todo/addTodo', payload)
+      })
+    }
+  };
+  </script>
+  ```
+- ### Arrow 참조 & Object Mapping
+
+  ```html
+  <script>
+  import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+  export default {
+    computed: {
+      ...mapState('todo', ['todos'])
+      ...mapState('todo', {schedule: 'todos'})
+      ...mapGetters('todo', ['numberOfCompletedTodo']) // getters는 화살표 함수 참조가 불가능하다.
+    },
+    methods: {
+      ...mapMutations('todo', {ADD_TODO: 'ADD_TODO'}),
+      ...mapActions('todo', {addTodo: 'addTodo'}),
+    }
+  };
+  </script>
+  ```
 
 </details>
 <details>
